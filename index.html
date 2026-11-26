@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Quick Quote Builder</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <h1>Quick Quote Builder</h1>
+      <p id="summary" class="summary"></p>
+    </div>
+    <div class="top-actions">
+      <button type="button" id="demo-button">Load demo</button>
+      <button type="button" id="open-button">Open file</button>
+      <button type="button" id="save-button">Save file</button>
+      <button type="button" id="new-button">New quote</button>
+      <button type="button" id="print-button" class="primary">Print or save PDF</button>
+      <input type="file" id="file-input" accept=".json,application/json" hidden>
+    </div>
+  </header>
+
+  <main>
+    <noscript><p class="alert">This tool needs JavaScript. Turn it on for this page and reload.</p></noscript>
+
+    <div id="storage-alert" class="alert" role="alert" hidden>
+      <p id="storage-alert-text"></p>
+      <div class="button-row">
+        <button type="button" id="save-raw-button">Download unreadable data</button>
+        <button type="button" id="start-fresh-button">Delete it and start fresh</button>
+      </div>
+    </div>
+
+    <div id="message" class="message" hidden>
+      <span id="message-text" role="status"></span>
+      <button type="button" id="undo-button" hidden>Undo</button>
+    </div>
+
+    <div class="layout">
+      <form id="editor" class="editor" novalidate autocomplete="off">
+        <fieldset class="card">
+          <legend>Document</legend>
+          <div class="fields">
+            <label>Type
+              <select name="kind">
+                <option>Quote</option>
+                <option>Invoice</option>
+              </select>
+            </label>
+            <label>Number
+              <input name="number" maxlength="40">
+              <span class="field-error" data-error-for="number"></span>
+            </label>
+            <label>Issue date
+              <input name="issueDate" type="date">
+              <span class="field-error" data-error-for="issueDate"></span>
+            </label>
+            <label><span id="due-label">Valid until</span>
+              <input name="dueDate" type="date">
+              <span class="field-error" data-error-for="dueDate"></span>
+            </label>
+            <label>Currency
+              <select name="currency">
+                <option value="USD">USD – US dollar</option>
+                <option value="EUR">EUR – Euro</option>
+                <option value="MAD">MAD – Moroccan dirham</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="card">
+          <legend>From</legend>
+          <div class="fields">
+            <label class="wide">Your name or business
+              <input name="fromName" maxlength="120">
+              <span class="field-error" data-error-for="fromName"></span>
+            </label>
+            <label class="wide">Details
+              <textarea name="fromDetails" rows="3" maxlength="1000" placeholder="Address, email, phone, tax number"></textarea>
+              <span class="field-error" data-error-for="fromDetails"></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="card">
+          <legend>Bill to</legend>
+          <div class="fields">
+            <label class="wide">Client name
+              <input name="toName" maxlength="120">
+              <span class="field-error" data-error-for="toName"></span>
+            </label>
+            <label class="wide">Details
+              <textarea name="toDetails" rows="3" maxlength="1000" placeholder="Company, address, email"></textarea>
+              <span class="field-error" data-error-for="toDetails"></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="card">
+          <legend>Line items</legend>
+          <div class="item-head" aria-hidden="true">
+            <span>Description</span><span>Qty</span><span>Unit price</span><span>Amount</span><span></span>
+          </div>
+          <ul id="items"></ul>
+          <span class="field-error" data-error-for="items"></span>
+          <div class="button-row">
+            <button type="button" id="add-item-button">Add line</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="card">
+          <legend>Discount and tax</legend>
+          <div class="fields">
+            <label>Discount type
+              <select name="discountType">
+                <option value="percent">Percentage (%)</option>
+                <option value="amount">Fixed amount</option>
+              </select>
+            </label>
+            <label>Discount
+              <input name="discountValue" inputmode="decimal" placeholder="0">
+              <span class="field-error" data-error-for="discountValue"></span>
+            </label>
+            <label>Tax name
+              <input name="taxLabel" maxlength="30" placeholder="Tax, VAT, TVA">
+              <span class="field-error" data-error-for="taxLabel"></span>
+            </label>
+            <label>Tax rate (%)
+              <input name="taxRate" inputmode="decimal" placeholder="0">
+              <span class="field-error" data-error-for="taxRate"></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="card">
+          <legend>Notes</legend>
+          <div class="fields">
+            <label class="wide">Payment terms, scope, or a thank-you
+              <textarea name="notes" rows="4" maxlength="3000"></textarea>
+              <span class="field-error" data-error-for="notes"></span>
+            </label>
+          </div>
+        </fieldset>
+      </form>
+
+      <section class="preview" aria-labelledby="preview-title">
+        <h2 id="preview-title" class="preview-title">Preview</h2>
+        <article id="paper" class="paper"></article>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    Saved only in this browser, on this device. Use Save file to keep a copy.
+  </footer>
+
+  <!-- Classic scripts, not modules: browsers block ES modules on file:// pages. -->
+  <script src="core.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
