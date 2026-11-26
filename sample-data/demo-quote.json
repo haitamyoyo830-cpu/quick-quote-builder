@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "quote": {
+    "kind": "Quote",
+    "number": "Q-014",
+    "issueDate": "today",
+    "dueDate": "today+30",
+    "currency": "USD",
+    "fromName": "Demo: Northlight Web Studio",
+    "fromDetails": "Sara Lindqvist\n18 Alder Lane, Austin, TX 78704\nhello@example.com · 555-0140",
+    "toName": "Demo: Juniper Street Bakery",
+    "toDetails": "Attn: Maya Torres\n42 Juniper Street, Austin, TX 78702\nmaya@example.com",
+    "items": [
+      { "id": "demo-1", "description": "Discovery call and site plan", "quantity": "1", "unitPrice": "350" },
+      { "id": "demo-2", "description": "Homepage design, two rounds of changes", "quantity": "1", "unitPrice": "900" },
+      { "id": "demo-3", "description": "Inner pages: menu, about, catering, contact", "quantity": "4", "unitPrice": "220" },
+      { "id": "demo-4", "description": "Online ordering setup (hours)", "quantity": "6.5", "unitPrice": "75" },
+      { "id": "demo-5", "description": "Product photo editing, per photo", "quantity": "24", "unitPrice": "12.50" },
+      { "id": "demo-6", "description": "Domain and hosting setup, first year", "quantity": "1", "unitPrice": "180" }
+    ],
+    "discountType": "percent",
+    "discountValue": "10",
+    "taxLabel": "Sales tax",
+    "taxRate": "8.25",
+    "notes": "DEMO DATA. All names and businesses are fictional.\n50% deposit to start, balance on launch. Prices valid for 30 days.\nThank you for considering Northlight!"
+  }
+}
